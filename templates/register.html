@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+{% block title %}Create an account — Morrow{% endblock %}
+{% block body %}
+<main class="container auth-shell">
+    <section class="auth-card auth-card-wide">
+        <span class="auth-symbol">M</span><span class="eyebrow">Make yourself at home</span>
+        <h1 class="section-title">Join the collection.</h1>
+        <p class="text-muted">Create an account to keep your favourite finds close.</p>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" for="registerUsername">Username</label>
+                <input id="registerUsername" class="form-control" type="text" name="user_input_username"
+                    autocomplete="username" required>
+                </div>
+            <div class="mb-3">
+                <label class="form-label" for="registerEmail">Email</label>
+                <input id="registerEmail" class="form-control" type="email" name="user_input_email" autocomplete="email" required>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="registerPassword">Password</label>
+                    <input id="registerPassword" class="form-control" type="password" name="user_input_pw"
+                        autocomplete="new-password" required>
+                    </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="registerConfirm">Confirm password</label>
+                    <input id="registerConfirm" class="form-control" type="password" name="user_input_cpw"
+                        autocomplete="new-password" required>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="g-recaptcha" data-sitekey=""></div>
+            </div>
+            <button class="btn btn-brand w-100" type="submit">Create account</button>
+        </form>
+        <p class="auth-switch mb-0">Already have an account? <a href="{% url 'ul' %}">Log in</a></p>
+    </section>
+</main>
+{% endblock %}

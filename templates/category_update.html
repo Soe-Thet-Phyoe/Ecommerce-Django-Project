@@ -1,0 +1,22 @@
+{% extends "layouts/base.html" %}
+{% block title %}Edit category — Morrow{% endblock %}
+{% block body %}
+<main class="container form-page-shell">
+    <a class="back-link" href="{% url 'cl' %}">← Back to categories</a>
+    <section class="form-card"><span class="eyebrow">Organize your shop</span>
+        <h1 class="section-title">Edit category.</h1>
+        <p class="text-muted">Update the category name shown in your shop.</p>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="form-label" for="categoryName">Name</label>
+                <input id="categoryName" class="form-control" type="text" name="user_input_name" value="{{category_key.name}}" required>
+            </div>
+            <div class="d-flex flex-column flex-sm-row gap-2">
+                <button class="btn btn-brand" type="submit">Save changes</button>
+                    <a class="btn btn-light" href="{% url 'cl' %}">Cancel</a>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}

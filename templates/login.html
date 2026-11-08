@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+{% block title %}Log in — Morrow{% endblock %}
+{% block body %}
+<main class="container auth-shell">
+    <section class="auth-card">
+        <span class="auth-symbol">M</span><span class="eyebrow">Welcome back</span>
+        <h1 class="section-title">Good to see you.</h1>
+        <p class="text-muted">Log in to pick up where you left off.</p>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" for="loginUsername">Username</label>
+                <input id="loginUsername" class="form-control" type="text" name="user_input_username" autocomplete="username" required>
+            </div>
+            <div class="mb-4">
+                <label class="form-label" for="loginPassword">Password</label>
+                <input id="loginPassword" class="form-control" type="password" name="user_input_pw" autocomplete="current-password" required>
+            </div>
+            <button class="btn btn-brand w-100" type="submit">Log in</button>
+        </form>
+        <p class="auth-switch mb-0">New to Morrow? <a href="{% url 'ur' %}">Create an account</a></p>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html' %}
+{% load humanize %}
+{% block title %}Products — Morrow{% endblock %}
+{% block body %}
+<main class="container page-shell">
+    <div class="page-heading d-flex flex-column flex-sm-row align-items-sm-end justify-content-between gap-3">
+        <div><span class="eyebrow">Manage your collection</span>
+            <h1 class="section-title">Products.</h1>
+            <p class="text-muted mb-0">Review your current shop inventory.</p>
+        </div>
+        {% if perms.products.add_productmodel %}
+        <a href="{% url 'pc' %}" class="btn btn-brand">Add product <span aria-hidden="true">+</span></a>
+        {% endif %}
+    </div>
+    <div class="surface-card table-responsive p-2 p-md-3">
+        <table class="table align-middle admin-table mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Added</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in product_key %}<tr>
+                    <td class="text-muted">{{forloop.counter}}</td>
+                    <td class="fw-semibold">{{i.title}}</td>
+                    <td>${{i.price|intcomma}}</td>
+                    <td>{{i.category|default:"—"}}</td>
+                    <td>{{i.qty}}</td>
+                    <td class="text-muted">{{i.created_at|naturaltime}}</td>
+                    <td class="text-end">
+                        <div class="d-inline-flex gap-2">
+                            {% if perms.products.change_productmodel %}
+                            <a href="{% url 'pu' i.id %}" class="btn btn-sm btn-outline-brand">Edit</a>
+                            {% endif %}
+                            {% if perms.products.delete_productmodel %}
+                            <a href="{% url 'pd' i.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center text-muted py-5">No products yet. Add your first product to bring
+                        the shop to life.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

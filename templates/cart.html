@@ -1,0 +1,55 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Your bag — Morrow{% endblock %}
+{% block body %}
+<main class="container page-shell">
+    <div class="page-heading d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-3">
+        <div>
+            <span class="eyebrow">Saved for you</span>
+            <h1 class="section-title">Your bag.</h1>
+            <p class="text-muted mb-0">A few good things, all in one place.</p>
+        </div>
+        <a class="text-link" href="{% url 'shop' %}">Continue browsing <span aria-hidden="true">→</span></a>
+    </div>
+    {% if products_data %}
+    <div class="row g-4 align-items-start">
+        <div class="col-lg-8">
+            <div class="table-responsive surface-card p-2 p-md-3">
+                <table class="table align-middle cart-table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Item</th><th scope="col">Price</th>
+                            <th scope="col" class="text-end">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in products_data %}
+                        <tr>
+                            <td><span class="fw-semibold">{{i.title}}</span></td>
+                            <td class="fw-semibold">${{i.price}}</td>
+                            <td class="text-end"><a href="{% url 'remove_from_cart' i.id %}" class="btn btn-sm btn-outline-danger">Remove</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <aside class="summary-card">
+                <span class="eyebrow">Your total</span>
+                <div class="summary-total">${{total_price}}</div>
+                <p class="small text-muted">Your selected finds, ready when you are.</p>
+                <a class="btn btn-brand w-100" href="{% url 'shop' %}">Keep exploring</a>
+            </aside>
+        </div>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <span class="empty-icon">♡</span>
+        <h2 class="h4">Your bag is taking a breather.</h2>
+        <p class="text-muted mb-3">When you find something you love, it’ll show up here.</p>
+        <a class="btn btn-brand" href="{% url 'shop' %}">Explore the shop</a>
+    </div>
+    {% endif %}
+</main>
+{% endblock %}

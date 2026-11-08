@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+{% block title %}Add category — Morrow{% endblock %}
+{% block body %}
+<main class="container form-page-shell">
+    <a class="back-link" href="{% url 'cl' %}">← Back to categories</a>
+    <section class="form-card"><span class="eyebrow">Organize your shop</span>
+        <h1 class="section-title">Add a category.</h1>
+        <p class="text-muted">Give shoppers an easy way to find related products.</p>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="form-label" for="categoryName">Name</label>
+                    <input id="categoryName" class="form-control" type="text"
+                    name="user_input_name" required>
+            </div>
+            <div class="d-flex flex-column flex-sm-row gap-2">
+                <button class="btn btn-brand" type="submit">Create category</button>
+                    <a class="btn btn-light" href="{% url 'cl' %}">Cancel</a>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% block title %}Verify your email — Morrow{% endblock %}
+{% block body %}
+<main class="container auth-shell">
+    <section class="auth-card">
+        <span class="auth-symbol">✳</span>
+        <span class="eyebrow">One quick step</span>
+        <h1 class="section-title">Check your inbox.</h1>
+        <p class="text-muted">Enter the verification code we sent to your email to finish setting up your account.</p>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="form-label" for="verifyOtp">Verification code</label>
+                <input id="verifyOtp" class="form-control otp-input" type="text" name="user_input_otp" autocomplete="one-time-code" inputmode="text" required>
+            </div>
+            <button class="btn btn-brand w-100" type="submit">Verify and continue</button>
+        </form>
+        <p class="auth-switch mb-0"><a href="{% url 'ur' %}">Back to registration</a></p>
+    </section>
+</main>
+{% endblock %}
